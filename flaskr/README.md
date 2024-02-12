@@ -23,7 +23,7 @@ http://127.0.0.1:5000/auth/register
 
 Create a username and password, click 'Register', then (when the page refreshes), click 'Login'. 
 
-From there, you may generate a new post, with the requirement that you provide a title and body of text, and an option to also include a house listing. 
+From there, you may generate a new post by clicking 'New' in the top right corner. This will open a page with the requirement that you provide a title and body of text, and an option to also include a house listing in a separate field (not required). 
 
 If you do include a listing in the 'House Listing URL' field, it will also auto-generate a LINK within the index of your post.
 
