@@ -5,17 +5,25 @@
 {% endblock %}
 
 {% block content %}
-  <form method="post">
-    <label for="title">Title</label>
-    <input name="title" id="title"
-      value="{{ request.form['title'] or post['title'] }}" required>
-    <label for="body">Body</label>
-    <textarea name="body" id="body">{{ request.form['body'] or post['body'] }}</textarea>
-    <input type="text" name="listing" value="{{ post.listing }}">
-    <input type="submit" value="Save">
-  </form>
-  <hr>
-  <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
-    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
-  </form>
+  <div class="container mt-4">
+    <form method="post">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" name="title" id="title" value="{{ request.form['title'] or post['title'] }}" required>
+      </div>
+      <div class="mb-3">
+        <label for="body" class="form-label">Body</label>
+        <textarea class="form-control" name="body" id="body" rows="5">{{ request.form['body'] or post['body'] }}</textarea>
+      </div>
+      <div class="mb-3">
+        <label for="listing" class="form-label">Listing URL</label>
+        <input type="url" class="form-control" name="listing" id="listing" value="{{ request.form['listing'] or post['listing'] }}">
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    <hr>
+    <form action="{{ url_for('blog.delete', id=post['id']) }}" method="post">
+      <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
+    </form>
+  </div>
 {% endblock %}
