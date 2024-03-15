@@ -1,23 +1,33 @@
-/*defining custom font in CSS to be used for my header
-@font-face {
-    font-family: 'Alphaclouds';
-    src: url('Alphaclouds.ttf') format('truetype');
-}
-*/
-
 
 /* Html and Body styles to set the tone of the page */
 html { 
-    font-family: "Roboto"; background-image: url("bkgrnd2.png"); padding: 1rem; }
+    font-family: "Roboto"; 
+    background-image: url("bkgrnd2.png"); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    padding: 2rem; }
 body { 
-    max-width: 960px; margin: 0 auto; background: white; }
+    max-width: max-content; /*adjusted using MDN docs*/
+    margin: 0 auto; 
+    background: white;
+    padding: 2rem; }
 
 /* Styles of the specific parts of the page */
-    h1 { 
-    font-family: 'Roboto'; color: #010329; font-size: 1.5rem; margin: 1rem 0; align-self: center; font-weight: bold; }
-    h2 {
-    font: 'Roboto'; font-size: 1rem;
-    }
+h1 { 
+    font-family: 'Roboto'; 
+    color: #010329; 
+    font-size: 1.5rem; 
+    margin: 1rem 0; 
+    align-self: center; 
+    font-weight: bold; }
+h2 {
+    font: 'Roboto'; 
+    font-size: 2rem; }
+.smaller-size {
+    font-size: 1.25rem; /* adding in custom CSS class to reduce font size of bootstrap "card-title" for post title*/ }
+.h6-reduce {
+    font-size: .75rem; /* adding in custom CSS class to reduce font size of bootstrap "card-title" for post title*/ }
 a { 
     color: #377ba8; }
 hr { 
@@ -51,7 +61,7 @@ nav ul li a, nav ul li span, header .action {
 .flash { 
     margin: 1em 0; padding: 1em; background: #cae6f6; border: 1px solid #377ba8; }
 .listing-link a {
-    font-size: 0.8em; /* Adjust the size as needed */
+    font-size: 0.8em; 
     }
 .post > header { 
     display: flex; align-items: flex-end; font-size: 0.85em; }
@@ -91,3 +101,27 @@ input.danger {
     color: #cc2f2e; }
 input[type=submit] { 
     align-self: start; min-width: 10em; }
+
+/*Styles for the Voting Buttons*/
+.vote-container .btn {
+    color: gray;
+    }
+.vote-container .btn.clicked {
+    color: red;
+    }
+.vote-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 1rem; /* Adjust spacing to the right of the vote buttons */
+    }
+.vote-btn {
+    background: none;
+    border: none;
+    color: gray; /* Initial color*/
+    cursor: pointer;
+    size: .5rem;
+    }
+.vote-btn.clicked {
+    color: red; /* Color after being clicked */
+    }

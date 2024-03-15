@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+<!--Creates a page which allows for a variety of pre-determined searches for listings/ posts on the site-->
+
+{% block header %}
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center">
+    <h1 class="fw-bold">{% block title %}Search Listings{% endblock %}</h1>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-3">
+  <form action="{{ url_for('blog.search_results') }}" method="GET" class="mb-5">
+    <div class="row g-3 align-items-center">
+      <div class="col-auto">
+        <label for="state" class="col-form-label">State:</label>
+      </div>
+      <div class="col-auto">
+        <input type="text" id="state" name="state" class="form-control" placeholder="Enter state">
+      </div>
+
+      <div class="col-auto">
+        <label for="sort" class="col-form-label">Sort by:</label>
+      </div>
+      <div class="col-auto">
+        <select id="sort" name="sort" class="form-select">
+          <option value="top_comments">Top Comments</option>
+          <option value="top_listings">Top Listings</option>
+        </select>
+      </div>
+
+      <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Results section - This will be populated with search results in the future -->
+  <section id="search-results">
+    <!-- Search results will go here -->
+  </section>
+</div>
+{% endblock %}

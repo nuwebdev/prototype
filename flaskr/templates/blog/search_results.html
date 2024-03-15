@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>Search Results</h1>
+{% endblock %}
+
+{% block content %}
+  {% for result in search_results %}
+    <!-- Display each search result -->
+    <div class="search-result-item">
+      <!-- Content of search result -->
+    </div>
+  {% else %}
+    <p>No results found.</p>
+  {% endfor %}
+{% endblock %}

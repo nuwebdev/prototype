@@ -19,11 +19,22 @@
       {% for post in posts %}
         <div class="card mb-3">
           <div class="card-body">
-            <h3 class="card-title">{{ post['title'] }}</h3>
-            <h6 class="card-subtitle mb-2 text-muted">
+            <!-- Voting buttons -->
+            <div class="d-flex align-items-center mb-3">
+              <form action="{{ url_for('blog.vote') }}" method="post" class="me-2">
+                <input type="hidden" name="post_id" value="{{ post['id'] }}">
+                <button type="submit" name="vote_type" value="1" class="btn btn-outline-success btn-sm">&#x25B2; </button>
+              </form>
+              <form action="{{ url_for('blog.vote') }}" method="post" class="me-2">
+                <input type="hidden" name="post_id" value="{{ post['id'] }}">
+                <button type="submit" name="vote_type" value="-1" class="btn btn-outline-danger btn-sm">&#x25BC; </button>
+              </form>
+            </div>
+            <h3 class="card-title smaller-size">{{ post['title'] }}</h3>
+            <h6 class="card-subtitle mb-2 text-muted h6-reduce">
               <em>by {{ post['username'] }} on {{ post['created'].strftime('%m/%d/%Y') }}</em>
             </h6>
-                        <p class="card-text">{{ post['body'] }}</p>
+            <p class="card-text">{{ post['body'] }}</p>
             {% if g.user['id'] == post['author_id'] %}
               <a class="btn btn-outline-secondary btn-sm" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
             {% endif %}
@@ -34,3 +45,4 @@
   {% endfor %}
 </div>
 {% endblock %}
+

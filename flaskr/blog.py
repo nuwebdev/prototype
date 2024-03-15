@@ -120,8 +120,69 @@ def parse_address_from_listing(listing_url):
     house_emoji = '\U0001F3E0'
     # Split the URL by slashes and take the part that contains the address
     parts = listing_url.split('/')
-    address_part = parts[4]  # This is based on the URL structure you've given
+    address_part = parts[4]  
      # Replace dashes with spaces
     address = address_part.replace('-', ' ')
     # Prepend the house emoji to the formatted address and make address a hyperlink
     return f"{house_emoji} <a href='{listing_url}' target='_blank'>{address}</a>"
+
+
+# This function defines a route for searching the blog and returning results
+@bp.route('/search')
+def search():
+    return render_template('blog/search.html')
+
+@bp.route('/search/results', methods=['GET'])
+def search_results():
+    # Retrieve the query parameters from request.args
+    state = request.args.get('state')
+    sort_by = request.args.get('sort')
+
+    # Perform your search logic against the database based on state and sort_by
+    # For example, if you want to find posts from a specific state:
+    db = get_db()
+    if sort_by == 'top_comments':
+        # An example query that sorts by the number of comments
+        # Modify the query to match your database structure
+        posts = db.execute(
+            'SELECT p.id, title, body, created, author_id, username, listing, COUNT(c.id) as comment_count'
+            ' FROM post p JOIN user u ON p.author_id = u.id'
+            ' LEFT JOIN comments c ON c.post_id = p.id'
+            ' WHERE p.state = ?'
+            ' GROUP BY p.id'
+            ' ORDER BY comment_count DESC',
+            (state,)
+        ).fetchall()
+    elif sort_by == 'top_listings':
+        # Similar query that sorts by another metric
+        # Modify the query to match your database structure
+        posts = db.execute('YOUR QUERY HERE').fetchall()
+    else:
+        # Default query if no sort_by is provided
+        posts = db.execute('YOUR QUERY HERE').fetchall()
+
+    # Transform the query results into a suitable format if needed
+    # posts = [dict(row) for row in posts]
+
+    # Use the index.html template to render the search results
+    return render_template('index.html', posts=posts)
+
+# This function defines a route for handling user votes on listings
+@bp.route('/vote', methods=['POST'])
+@login_required
+def vote():
+    user_id = g.user['id']
+    post_id = request.form['post_id']
+    vote_type = request.form['vote_type']
+
+    db = get_db()
+    try:
+        db.execute(
+            'INSERT INTO vote (user_id, post_id, vote_type) VALUES (?, ?, ?) ON CONFLICT(user_id, post_id) DO UPDATE SET vote_type=?',
+            (user_id, post_id, vote_type, vote_type)
+        )
+        db.commit()
+    except db.IntegrityError:
+        error = "Database error occurred."
+        flash(error)
+    return redirect(url_for('index'))

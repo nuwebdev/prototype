@@ -16,3 +16,14 @@ CREATE TABLE post (
   listing TEXT,
   FOREIGN KEY (author_id) REFERENCES user (id)
 );
+
+/* This table will keep track of votes and ensure a user can only vote once per listing */
+CREATE TABLE vote (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    post_id INTEGER NOT NULL,
+    vote_type INTEGER NOT NULL, -- 1 for upvote, -1 for downvote
+    FOREIGN KEY (user_id) REFERENCES user (id),
+    FOREIGN KEY (post_id) REFERENCES post (id),
+    UNIQUE(user_id, post_id)
+);
