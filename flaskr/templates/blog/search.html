@@ -14,23 +14,28 @@
 <div class="container mt-3">
   <form action="{{ url_for('blog.search_results') }}" method="GET" class="mb-5">
     <div class="row g-3 align-items-center">
+      <!-- Search by State -->
       <div class="col-auto">
-        <label for="state" class="col-form-label">State:</label>
-      </div>
-      <div class="col-auto">
-        <input type="text" id="state" name="state" class="form-control" placeholder="Enter state">
-      </div>
-
-      <div class="col-auto">
-        <label for="sort" class="col-form-label">Sort by:</label>
-      </div>
-      <div class="col-auto">
-        <select id="sort" name="sort" class="form-select">
-          <option value="top_comments">Top Comments</option>
-          <option value="top_listings">Top Listings</option>
-        </select>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="search_type" id="searchByState" value="state" checked>
+          <label class="form-check-label" for="searchByState">
+            State:
+          </label>
+          <input type="text" id="state" name="state" class="form-control" placeholder="Enter state" disabled>
+        </div>
       </div>
 
+      <!-- Search by Most Comments -->
+      <div class="col-auto">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="search_type" id="searchByComments" value="top_comments">
+          <label class="form-check-label" for="searchByComments">
+            Most Comments
+          </label>
+        </div>
+      </div>
+
+      <!-- Search Button -->
       <div class="col-auto">
         <button type="submit" class="btn btn-primary">Search</button>
       </div>
@@ -42,4 +47,16 @@
     <!-- Search results will go here -->
   </section>
 </div>
+
+<!-- Script to disable or enable State input based on selection -->
+<script>
+document.getElementById('searchByState').addEventListener('change', function() {
+  document.getElementById('state').disabled = !this.checked;
+});
+
+document.getElementById('searchByComments').addEventListener('change', function() {
+  document.getElementById('state').disabled = this.checked;
+});
+</script>
+
 {% endblock %}
