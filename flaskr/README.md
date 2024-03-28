@@ -2,16 +2,15 @@
 
 The idea is simple: a web app which allows users to leave comments on real estate listings. 
 
-The 'comment on houses' app makes use of the Flask's tutorial of how to setup an app for a basic blog website. It includes a SQL database, and uses Python, and html. 
+The 'comment on houses' app makes use of the Flask's tutorial of how to setup an app for a basic blog website. It includes a SQLite database, and uses Python, and html. 
 
 It builds on the tutorial by adding an additional field on the site/ column in the SQL database for a hyperlink of a house listing. 
 
-To run this app, download the code FLASK-DEMO-SEANMAINER code base and open it in the IDE of your choice.
+To run this app, clone FLASK-DEMO-SEANMAINER code base and open it in the IDE of your choice.
 
 A virtual environment has been created, including all necessary dependencies to ensure reproducibility. 
 
-HOW TO RUN THE WEB APP:
- 
+## HOW TO RUN THE WEB APP:
 
 STEP 1: Make commands have been provided. Setup and activate the virtual environment in your Terminal:
 
@@ -21,11 +20,12 @@ STEP 2: Initialize the app within the virtual environment:
 
 ```make run```
 
-STEP 3: After running these commands, open a browser and visit: 
+STEP 3: After running these make commands, open a browser and visit: 
+http://127.0.0.1:5000 
 
-http://127.0.0.1:5000/auth/register
+An indexed version of all posts will be displayed. Each post is a (set of) comments on a specific listing. Comments are grouped by houses, all queried and returned from my sql database.
 
-STEP 4: Create a username and password, click 'Register'. 
+STEP 4: Visit  http://127.0.0.1:5000/auth/register to create a username and password, click 'Register'. 
 
 STEP 5: Re-enter your username/ password, click 'Login'. 
 

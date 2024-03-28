@@ -13,34 +13,38 @@
 {% block content %}
 <div class="container mt-3">
   <form action="{{ url_for('blog.search_results') }}" method="GET" class="mb-5">
-    <div class="row g-3 align-items-center">
-      <!-- Search by State -->
-      <div class="col-auto">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="search_type" id="searchByState" value="state" checked>
-          <label class="form-check-label" for="searchByState">
-            State:
-          </label>
-          <input type="text" id="state" name="state" class="form-control" placeholder="Enter state" disabled>
-        </div>
-      </div>
-
-      <!-- Search by Most Comments -->
-      <div class="col-auto">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="search_type" id="searchByComments" value="top_comments">
-          <label class="form-check-label" for="searchByComments">
-            Most Comments
-          </label>
-        </div>
-      </div>
-
-      <!-- Search Button -->
-      <div class="col-auto">
-        <button type="submit" class="btn btn-primary">Search</button>
-      </div>
+    <!-- Search by State -->
+    <div class="mb-3">
+      <input class="form-check-input" type="radio" name="search_type" id="searchByState" value="state" checked>
+      <label class="form-check-label" for="searchByState">
+        Search by State:
+      </label>
+      <select id="state" name="state" class="form-select">
+        <!-- Dynamically populate states -->
+        {% for state in states %}
+          <option value="{{ state }}">{{ state }}</option>
+      {% endfor %}
     </div>
+
+    <!-- Search by 'Most Comments' -->
+    <div class="mb-3">
+      <input class="form-check-input" type="radio" name="search_type" id="searchByComments" value="top_comments">
+      <label class="form-check-label" for="searchByComments">
+        Most Comments
+      </label>
+    </div>
+
+    <!-- Search by 'Best Comments' -->
+    <div class="mb-3">
+      <input class="form-check-input" type="radio" name="search_type" id="searchByVotes" value="top_votes">
+      <label class="form-check-label" for="searchByVotes">
+        Best Comments
+      </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Search</button>
   </form>
+</div>
 
   <!-- Results section - This will be populated with search results in the future -->
   <section id="search-results">

@@ -6,6 +6,7 @@ from werkzeug.exceptions import abort
 from flaskr.auth import login_required
 from flaskr.db import get_db
 
+from collections import defaultdict
 from itertools import groupby
 from operator import itemgetter
 
@@ -30,8 +31,7 @@ def index():
         if post['listing']:
             parsed_address, state = parse_address_from_listing(post['listing'])
             post['parsed_address'] = parsed_address
-            post['state'] = state  # Assuming you have a column 'state' in your 'post' table
-
+            post['state'] = state  
 
     # Group posts by listing
     grouped_posts = {k: list(v) for k, v in groupby (posts, key=itemgetter('listing'))}
@@ -103,12 +103,13 @@ def update(id):
 
         if error is not None:
             flash(error)
+            parsed_address, state = parse_address_from_listing(listing)
         else:
             db = get_db()
             db.execute(
-                'UPDATE post SET title = ?, listing = ?, body = ?'
+                'UPDATE post SET title = ?, body = ?, listing = ?, state = ?'
                 ' WHERE id = ?',
-                (title, listing, body, id)
+                (title, body, listing, state, id)
             )
             db.commit()
             return redirect(url_for('blog.index'))
@@ -144,35 +145,63 @@ def parse_address_from_listing(listing_url):
 # This function defines a route for searching the blog and returning results
 @bp.route('/search')
 def search():
-    return render_template('blog/search.html')
+    db = get_db()
+    # Query to get all unique states from the 'post' table
+    states = db.execute('SELECT DISTINCT state FROM post ORDER BY state ASC').fetchall()
+    states = [state['state'] for state in states if state['state']]  # List comprehension to clean up the result
+    return render_template('blog/search.html', states=states)
+
 
 @bp.route('/search/results', methods=['GET'])
 def search_results():
     search_type = request.args.get('search_type')
     db = get_db()
 
+    # Search Options based on user selection
     if search_type == 'state':
         state = request.args.get('state')
-        posts = db.execute(
-            'SELECT * FROM post WHERE state = ? ORDER BY created DESC',
-            (state,)
-        ).fetchall()
+        query = 'SELECT * FROM post WHERE state = ? ORDER BY created DESC'
+        params = (state,)
     elif search_type == 'top_comments':
-        posts = db.execute(
-            'SELECT p.id, title, body, created, author_id, username, listing, COUNT(c.id) as comment_count'
-            ' FROM post p JOIN user u ON p.author_id = u.id'
-            ' LEFT JOIN comments c ON c.post_id = p.id'
-            ' GROUP BY p.id'
-            ' ORDER BY comment_count DESC'
-        ).fetchall()
+        query = '''
+        SELECT p.id, p.title, p.body, p.created, p.author_id, u.username, p.listing, COUNT(c.id) as comment_count
+        FROM post p
+        JOIN user u ON p.author_id = u.id
+        LEFT JOIN comments c ON c.post_id = p.id
+        GROUP BY p.listing
+        ORDER BY p.listing, comment_count DESC
+        '''
+        params = ()
+    elif search_type == 'top_votes':
+        query = '''
+        SELECT p.id, p.title, p.body, p.created, p.author_id, u.username, p.listing, IFNULL(SUM(v.vote_type), 0) as vote_sum
+        FROM post p
+        JOIN user u ON p.author_id = u.id
+        LEFT JOIN vote v ON v.post_id = p.id
+        GROUP BY p.listing
+        ORDER BY p.listing, vote_sum DESC
+        '''
+        params = ()
     else:
-        posts = []
+        query = 'SELECT * FROM post ORDER BY created DESC'
+        params = ()
 
-    # Transform the query results into a suitable format if needed
-    # posts = [dict(row) for row in posts]
+    posts = [dict(row) for row in db.execute(query, params).fetchall()]
+    
+    # Apply the parsing function to each 'listing' URL for posts in the search result
+    for post in posts:
+        if post['listing']:
+            parsed_address, state = parse_address_from_listing(post['listing'])
+            post['parsed_address'] = parsed_address
+            post['state'] = state
 
-    # Use the index.html template to render the search results
-    return render_template('index.html', posts=posts)
+    # Group posts by 'parsed_address' if you want to group them by the parsed listing addresses
+    # Assuming 'listing' is unique and directly corresponds to 'parsed_address'
+    grouped_posts = {k: list(v) for k, v in groupby(posts, key=itemgetter('parsed_address'))}
+    
+    # Use the index.html template to render the search results with grouped posts
+    return render_template('blog/index.html', grouped_posts=grouped_posts)
+
 
 # This function defines a route for handling user votes on listings
 @bp.route('/vote', methods=['POST'])
