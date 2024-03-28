@@ -6,10 +6,6 @@ The 'comment on houses' app makes use of the Flask's tutorial of how to setup an
 
 It builds on the tutorial by adding an additional field on the site/ column in the SQL database for a hyperlink of a house listing. 
 
-To run this app, clone FLASK-DEMO-SEANMAINER code base and open it in the IDE of your choice.
-
-A virtual environment has been created, including all necessary dependencies to ensure reproducibility. 
-
 ## HOW TO RUN THE WEB APP:
 
 STEP 1: Make commands have been provided. Setup and activate the virtual environment in your Terminal:
