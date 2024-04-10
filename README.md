@@ -36,7 +36,3 @@ Flask Pallet Projects Blog Tutorial: https://flask.palletsprojects.com/en/3.0.x/
 Stack Overflow: https://stackoverflow.com/questions/18178867/how-can-i-use-googles-roboto-font-on-a-website
 
 ChatGPT: https://chat.openai.com/
-
-DaFont: https://www.dafont.com/alpha-clouds.font
-
-Darkroom Society: https://darkroomsociety.com/
