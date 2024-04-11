@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
       <div class="container">
           <a class="navbar-brand" href="#">Comment on Houses</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,15 +33,23 @@
       </div>
     </nav>
 
-    <main class="container mt-4">
+    <main class="container my-5 rounded shadow-sm">
         <header>
             {% block header %}{% endblock %}
         </header>
         {% for message in get_flashed_messages() %}
-            <div class="alert alert-info">{{ message }}</div>
+            <div class="alert alert-info" role="alert">
+                {{ message }}
+            </div>
         {% endfor %}
+        <section>
         {% block content %}{% endblock %}
+        </section>
     </main>
+
+    <footer class="container text-center mt-4 py-2">
+        <p class="text-muted">&copy; {{ current_year }} Comment on Houses</p> <!-- Dynamic year -->
+    </footer>
 
     <!-- JavaScript for the upvote/ downvote buttons - always put JS after HTML so HTML is loaded first! -->
     <script>

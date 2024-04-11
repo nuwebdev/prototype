@@ -1,53 +1,65 @@
 
 /* Html and Body styles to set the tone of the page */
 html { 
-    font-family: "Roboto"; 
-    background-image: url("bkgrnd2.png"); 
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    padding: 2rem; }
+    font-family: "Roboto", sans-serif; 
+    background: #f9f9fb; 
+    color: #424242; 
+    line-height: 1.6;  }
 body { 
-    max-width: max-content; /*adjusted using MDN docs*/
-    margin: 0 auto; 
-    background: white;
-    padding: 2rem; }
+    max-width: 80vw; /* Responsive width */
+    margin: 2rem auto; 
+    background: #fff;
+    padding: 2rem;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    border-radius: 8px; }
 
 /* Styles of the specific parts of the page */
 h1 { 
     font-family: 'Roboto'; 
-    color: #010329; 
+    color: #333; 
     font-size: 1.5rem; 
-    margin: 1rem 0; 
+    margin: 1rem 0;
+    margin-top: 0; 
     align-self: center; 
     font-weight: bold; }
 h2 {
     font: 'Roboto'; 
-    font-size: 2rem; }
+    font-size: 1.75rem; }
 .smaller-size {
     font-size: 1.25rem; /* adding in custom CSS class to reduce font size of bootstrap "card-title" for post title*/ }
 .h6-reduce {
     font-size: .75rem; /* adding in custom CSS class to reduce font size of bootstrap "card-title" for post title*/ }
+
+/* Links */
 a { 
-    color: #377ba8; }
+    color: #0056b3;
+    text-decoration: underline; }
+a:hover, a:focus {
+    color: #003975; /* Darker on hover for visual feedback */ }
 hr { 
     border: none; border-top: 1px solid lightgray; }
+
+/* Nav */
 nav { 
-    background: lightgray; display: flex; align-items: center; padding: 0 0.5rem; border-radius:0% 0% 20% 20%; }
-nav h1 { 
-    flex: auto; margin: 0; }
-nav h1 a { 
-    text-decoration: none; padding: 0.25rem 0.5rem; }
-nav ul  { 
-    display: flex; list-style: none; margin: 0; padding: 0; }
-nav ul li a, nav ul li span, header .action { 
-    display: block; padding: 0.5rem; }
+    background: linear-gradient(to right, #ddd6f3, #faaca8); 
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+nav h1, nav ul li a {
+    color: #333; /* Darker text for better readability */ }
+nav ul li a:hover, nav ul li a:focus {
+    background-color: #dae0e5; /* Subtle hover effect */ }
+nav .navbar-brand, nav .nav-link {
+    color: #333; }
+nav .navbar-brand:hover, nav .nav-link:hover {
+    color: #555; /* slightly lighter color for hover states */ }
 
 /*Styles for the Content*/
+main {
+    padding-top: 2rem; /* Add top padding */
+    padding-bottom: 2rem; /* Add bottom padding */}
 .about {
     font-style: italic;
-    color: slategray;
-}
+    color: slategray;}
 .content { 
     padding: 0 1rem 1rem; }
 .content > header { 
@@ -56,72 +68,70 @@ nav ul li a, nav ul li span, header .action {
     flex: auto; margin: 1rem 0 0.25rem 0; }
 .content-indent {
     margin-left: 40px; 
-    line-height: 1.2;
-    }
+    line-height: 1.2;}
 .flash { 
     margin: 1em 0; padding: 1em; background: #cae6f6; border: 1px solid #377ba8; }
 .listing-link a {
-    font-size: 0.8em; 
-    }
-.post > header { 
-    display: flex; align-items: flex-end; font-size: 0.85em; }
-.post > header > div:first-of-type { 
-    flex: auto; }
-.post > header h1 { 
-    font-size: 1.5em; margin-bottom: 0; }
-.post .about {
-    font-style: italic;
-    color: slategray;
-    margin-top: 0;
-    margin-bottom: 0; /* Reduce space by minimizing bottom margin */
-    display: inline-block; /* If not already, to ensure it stays on the same line */
-    line-height: 1.2; }
-.post .body { 
-    white-space: pre-line;
-    margin-top: 0; /* Reduces space between this and the preceding element */
-    line-height: 1.2; }
-.post-title-and-author {
-    display: flex;
-    align-items: baseline; }
-.post-title-and-author h2 {
-    margin-right: 40px;
-    margin-bottom: 0; /* Ensure this is 0 to reduce space */
-    line-height: 1.2; }
-.content:last-child { 
-    margin-bottom: 0; }
-.content form { 
-    margin: 1em 0; display: flex; flex-direction: column; }
-.content label { 
-    font-weight: bold; margin-bottom: 0.5em; }
-.content input, .content textarea { 
-    margin-bottom: 1em; }
-.content textarea { 
-    min-height: 12em; resize: vertical; }
-input.danger { 
-    color: #cc2f2e; }
-input[type=submit] { 
-    align-self: start; min-width: 10em; }
+    font-size: 0.8em; }
 
-/*Styles for the Voting Buttons*/
-.vote-container .btn {
-    color: gray;
-    }
+/* Post Styles */
+.post {
+    margin-bottom: 2rem; /* More space between posts */
+    padding: 1.5rem; /* More internal space */
+    border-left: 4px solid #0056b3; /* Left border for visual interest */ }
+.post > header {
+    border-bottom: 1px solid #ddd; /* Lighter border */
+    margin-bottom: 1rem; }
+.post:hover {
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15); /* More pronounced hover effect */ }
+
+/* Content and Typography */
+.content, .post .about, .post .body {
+    color: #424242; /* Lighter for better readability */ }
+.content > header {
+    border-bottom: none; /* Remove thick border */ }
+.content-indent, .post .about {
+    margin-left: 0; /* Remove indentation for cleaner look */ }
+.flash {
+    background: #cce5ff; /* Bootstrap info alert background for consistency */
+    border-color: #b8daff; /* Matching border color */ }
+.post .about, .post .body {
+    font-size: 1rem; /* Standardize font size */
+    margin-top: 0.5rem; /* Consistent spacing above */
+}
+
+/* Search */
+.search-form {
+    margin-top: 1rem; /* Reduced top margin */
+    margin-bottom: 1rem; /* Reduced bottom margin */}
+.search-form .form-group {
+    margin-bottom: 2rem; /* Adjust as needed for spacing between search options */ }
+.search-form .btn {
+    margin-top: 1rem; /* Add some space above the button if needed */
+    width: auto; /* If you want the button to size according to its content */
+    padding: 0.5rem 1rem; /* Adjust padding for the button, if needed */}
+
+
+/* Buttons and Forms */
+input[type=submit], .vote-btn {
+    background-color: #0056b3; /* Consistent button color */
+    color: #fff; /* White text for contrast */
+    border: none; /* Remove default border */
+    border-radius: 4px; /* Rounded corners */
+    padding: 0.5rem 1rem; /* Adequate padding */
+    margin-top: 0.5rem; /* Space above button */
+}
+input[type=submit]:hover, .vote-btn:hover {
+    background-color: #003975; /* Darker background on hover */
+}
 .vote-container .btn.clicked {
-    color: red;
-    }
-.vote-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 1rem; /* Adjust spacing to the right of the vote buttons */
-    }
+    color: #28a745; /* Bootstrap success color for clarity */
+}
+
+/* Voting Buttons */
 .vote-btn {
-    background: none;
-    border: none;
-    color: gray; /* Initial color*/
-    cursor: pointer;
-    size: .5rem;
-    }
+    font-size: 1.5rem; /* Larger for easier interaction */
+}
 .vote-btn.clicked {
-    color: red; /* Color after being clicked */
-    }
+    color: #dc3545; /* Bootstrap danger color for clicked state */
+}

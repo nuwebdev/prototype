@@ -12,9 +12,9 @@
 
 {% block content %}
 <div class="container mt-3">
-  <form action="{{ url_for('blog.search_results') }}" method="GET" class="mb-5">
+  <form action="{{ url_for('blog.search_results') }}" method="GET" class="mb-5 search-form">
     <!-- Search by State -->
-    <div class="mb-3">
+    <div class="mb-3 form-group">
       <input class="form-check-input" type="radio" name="search_type" id="searchByState" value="state" checked>
       <label class="form-check-label" for="searchByState">
         Search by State:
@@ -27,7 +27,7 @@
     </div>
 
     <!-- Search by 'Most Comments' -->
-    <div class="mb-3">
+    <div class="mb-3 form-group">
       <input class="form-check-input" type="radio" name="search_type" id="searchByComments" value="top_comments">
       <label class="form-check-label" for="searchByComments">
         Most Comments
@@ -35,7 +35,7 @@
     </div>
 
     <!-- Search by 'Best Comments' -->
-    <div class="mb-3">
+    <div class="mb-3 form-group">
       <input class="form-check-input" type="radio" name="search_type" id="searchByVotes" value="top_votes">
       <label class="form-check-label" for="searchByVotes">
         Best Comments
