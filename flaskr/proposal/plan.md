@@ -16,4 +16,5 @@ v0.2: Prototype (https://github.com/SeanMainer/coh/releases/tag/v0.2)
 v0.3: Final Project 
 - Improving user interface by adding options to top navbar (login, register, logout, all listings, search listings)
 - Adding in upvote/ downvote functionality on front end and back end: Creating new table 'vote' and functionality to track votes by user.
-- Creating and implementing search functionlity in Python and database: new page which allows users to search by 'State', Most Comments, or Best Comments (ie. most upvoted)
+- Creating and implementing Search functionality in Python and database: new page which allows users to search by 'State', Most Comments, or Best Comments (ie. most upvoted)
+- Improved styling using bootstrap and custom CSS
