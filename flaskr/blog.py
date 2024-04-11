@@ -96,6 +96,7 @@ def update(id):
         title = request.form['title']
         body = request.form['body']
         listing = request.form.get('listing')
+        _, state = parse_address_from_listing(listing) if listing else (None, None)
         error = None
 
         if not title:
