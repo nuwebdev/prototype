@@ -41,7 +41,7 @@ The team lead's GitHub Classroom repository will be used for the project, which 
 
 Front-end:
   -   Bootstrap: Used for front-end design to ensure a responsive and modern user interface. 
-  -   HMTL: Basic structure of web pages, with Bootstrap managing CSS. 
+  -   HTML: Basic structure of web pages, with Bootstrap managing CSS. 
 
 Back-end:
   -   Flask: Serving as the back-end framework, handling routing, server-side logic, and integration between front-end and    database. Uses Flask to dynamically generate HTML content based on backend data.
